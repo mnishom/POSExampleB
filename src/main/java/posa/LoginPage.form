@@ -30,6 +30,9 @@
           <Color blue="cc" green="cc" red="0" type="rgb"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;            public void paintComponent(Graphics g) {  &#xd;&#xa;                Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;                    LoginPage.class.getResource(&quot;/bg/bg.jpg&quot;));  &#xd;&#xa;                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;            }  &#xd;&#xa;        };"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
