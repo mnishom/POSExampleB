@@ -231,12 +231,16 @@ public class LoginPage extends javax.swing.JFrame {
             
             if(n > 0){
                 //System.out.println("Login berhasil");
-                if(jabatan.equals("KASIR")){
-                    KasirPage KP = new KasirPage();
+                if(jabatan.equals("ADMIN")){
+                    AdminPage KP = new AdminPage();
                     KP.P = P;
                     KP.setVisible(true); 
                     this.setVisible(false);
                     KP.setExtendedState(Frame.MAXIMIZED_BOTH); 
+                }else if(jabatan.equals("KASIR")){
+                    
+                }else if(jabatan.equals("MANAJER")){
+                    
                 }
             }else {
                 System.err.println("Login Gagal, username/password invalid");
