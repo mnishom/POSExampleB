@@ -9,14 +9,17 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 import posb.Koneksi;
+import posb.Pegawai;
 import posb.dialogs.AddNewUser;
+import posb.dialogs.DeleteData;
+import posb.dialogs.EditUser;
 
 /**
  *
  * @author mnish
  */
 public class ManageUsers extends javax.swing.JPanel {
-
+    Pegawai Px;
     /**
      * Creates new form ManageUsers
      */
@@ -58,9 +61,19 @@ public class ManageUsers extends javax.swing.JPanel {
 
         btnEdit.setText("Edit");
         btnEdit.setEnabled(false);
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnHapus.setText("Hapus");
         btnHapus.setEnabled(false);
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Refresh");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +97,7 @@ public class ManageUsers extends javax.swing.JPanel {
                 .addComponent(btnHapus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -135,8 +148,21 @@ public class ManageUsers extends javax.swing.JPanel {
         if(n != -1){
             btnEdit.setEnabled(true);
             btnHapus.setEnabled(true);
-        }else {
             
+            //capture data
+            Object IDPg = jTable1.getValueAt(n, 0);
+            int ID = Integer.parseInt(IDPg.toString());        
+            String namaPg = jTable1.getValueAt(n, 1).toString();
+            String jabatanPg = jTable1.getValueAt(n, 2).toString();
+            String usernamePg = jTable1.getValueAt(n, 3).toString();
+            String passwordPg = jTable1.getValueAt(n, 4).toString();
+            Px = new Pegawai();
+            Px.setId(ID); 
+            Px.setNama(namaPg); 
+            Px.setJabatan(jabatanPg); 
+            Px.setUsername(usernamePg);
+            Px.setPassword(passwordPg);
+        }else {            
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -145,6 +171,19 @@ public class ManageUsers extends javax.swing.JPanel {
         btnHapus.setEnabled(false);
         jTable1.clearSelection();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        EditUser Usr = new EditUser(null, true);         
+        Usr.Pg = Px;
+        Usr.setVisible(true); 
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        DeleteData DD = new DeleteData(null, true);
+        DD.P = Px;
+        DD.setVisible(true); 
+        
+    }//GEN-LAST:event_btnHapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
