@@ -4,8 +4,10 @@
  */
 package posb.dialogs;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import posb.Koneksi;
@@ -158,14 +160,15 @@ public class AddNewUser extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbJabatanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nama = txtNama.getText();
-        String jabatan = cmbJabatan.getSelectedItem().toString();
-        String username = txtUsername.getText();
-        String password = new String(txtPassword.getPassword());
         
         try {
+            String nama = txtNama.getText();
+            String jabatan = cmbJabatan.getSelectedItem().toString();
+            String username = txtUsername.getText();
+            String password = new String(txtPassword.getPassword());
+            
             String Q = "INSERT INTO pegawai "
-                    + "(nama_pegawai,jabatan,username,password_hash) "
+                    + "(nama_pegawai, jabatan,username,password_hash) "
                     + "VALUES (?,?,?,?)";
             Connection C = Koneksi.Go();
             PreparedStatement P = C.prepareStatement(Q);
@@ -180,7 +183,11 @@ public class AddNewUser extends javax.swing.JDialog {
             //pesan/notifikasi
             JOptionPane.showMessageDialog(null, "Data sukses disimpan"); 
             
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(
+                    null, 
+                    "Error: "+e.getMessage()
+            );
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
